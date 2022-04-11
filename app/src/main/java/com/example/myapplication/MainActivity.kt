@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() , GestureDetector.OnGestureListener, Ge
 //            3 -> img0.setImageResource(R.drawable.pic3)
 //        }
         txv.text = PictureNo.toString()
-        var res:Int = getResources().getIdentifier("pu" + PictureNo.toString(),
+        var res:Int = getResources().getIdentifier("pic" + PictureNo.toString(),
             "drawable", getPackageName())
         img0.setImageResource(res)
     }
@@ -30,6 +30,13 @@ class MainActivity : AppCompatActivity() , GestureDetector.OnGestureListener, Ge
         setContentView(R.layout.activity_main)
         gDetector = GestureDetector(this, this)
         img0.setOnTouchListener(this)
+        var res:Int = -1
+        var countDrawables:Int = -1
+        while (res != 0) {
+            countDrawables++
+            res = getResources().getIdentifier("pic" + countDrawables.toString(),"drawable", getPackageName())
+            }
+        TotalPictures = countDrawables
     }
 
 //    override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -38,7 +45,7 @@ class MainActivity : AppCompatActivity() , GestureDetector.OnGestureListener, Ge
 //    }
 
     override fun onTouch(p0: View?, event: MotionEvent?): Boolean {
-//        gDetector.onTouchEvent(event)
+        gDetector.onTouchEvent(event)
         return true
     }
 
