@@ -13,13 +13,16 @@ class MainActivity : AppCompatActivity() , GestureDetector.OnGestureListener, Ge
     var PictureNo:Int = 0  //目前顯示第幾張圖
     var TotalPictures:Int = 4 //總共幾張圖片(假設僅顯示pu0-pu3)
     fun ShowPicture() {
-        when (PictureNo) {
-            0 -> img0.setImageResource(R.drawable.pic0)
-            1 -> img0.setImageResource(R.drawable.pic1)
-            2 -> img0.setImageResource(R.drawable.pic2)
-            3 -> img0.setImageResource(R.drawable.pic3)
-        }
+//        when (PictureNo) {
+//            0 -> img0.setImageResource(R.drawable.pic0)
+//            1 -> img0.setImageResource(R.drawable.pic1)
+//            2 -> img0.setImageResource(R.drawable.pic2)
+//            3 -> img0.setImageResource(R.drawable.pic3)
+//        }
         txv.text = PictureNo.toString()
+        var res:Int = getResources().getIdentifier("pu" + PictureNo.toString(),
+            "drawable", getPackageName())
+        img0.setImageResource(res)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,11 +49,15 @@ class MainActivity : AppCompatActivity() , GestureDetector.OnGestureListener, Ge
 
     override fun onSingleTapUp(p0: MotionEvent?): Boolean {
 //        txv.text = "短按"
+        PictureNo = 0
+        ShowPicture()
         return true
     }
 
     override fun onLongPress(p0: MotionEvent?) {
 //        txv.text = "長按"
+        PictureNo = TotalPictures - 1
+        ShowPicture()
     }
 
     override fun onShowPress(p0: MotionEvent?) {
@@ -65,6 +72,19 @@ class MainActivity : AppCompatActivity() , GestureDetector.OnGestureListener, Ge
 
     override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
 //        txv.text = "快滑\nx1y1: " + e1?.getX().toString() + ", " + e1?.getY().toString() +"\nx2y2: " + e2?.getX().toString() + ", " + e2?.getY().toString() +"\nX軸Y軸速度:" + velocityX.toString() + ", " +  velocityY.toString()
+        if (e1!!.getX() < e2!!.getX()){  //向右快滑
+             PictureNo++
+            if (PictureNo == TotalPictures) {
+                PictureNo = 0
+            }
+        }
+        else{     //向左快滑
+            PictureNo--
+            if (PictureNo < 0) {
+                PictureNo = TotalPictures - 1
+            }
+        }
+        ShowPicture()
         return true
     }
 
