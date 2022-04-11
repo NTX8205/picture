@@ -23,6 +23,6 @@
         android:id="@+id/img0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/IMG_6846" />
+        app:srcCompat="@drawable/pic0" />
 
 </LinearLayout>
