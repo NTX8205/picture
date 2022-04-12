@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() , GestureDetector.OnGestureListener, Ge
 
     lateinit var gDetector: GestureDetector
     var PictureNo:Int = 0  //目前顯示第幾張圖
-    var TotalPictures:Int = 4 //總共幾張圖片(假設僅顯示pu0-pu3)
+    var TotalPictures:Int = 4 //總共幾張圖片(假設僅顯示pic0-pic3)
     fun ShowPicture() {
 //        when (PictureNo) {
 //            0 -> img0.setImageResource(R.drawable.pic0)
